@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "661082479869",
+    "project_id": "ltdd-translatelg",
+    "storage_bucket": "ltdd-translatelg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661082479869:android:3494e3432088d86dcd7294",
+        "android_client_info": {
+          "package_name": "com.example.translatelg"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661082479869-fsvchct3aqkugd9a9gnd6bpup1naerd6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKtkl8AuLTvBvRv8SOnkMck51ZM5WTXl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661082479869-fsvchct3aqkugd9a9gnd6bpup1naerd6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
