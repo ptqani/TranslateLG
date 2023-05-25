@@ -54,7 +54,7 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     private Spinner fromSpinner, toSpinner;
     private TextInputEditText textInput;
-    private ImageView micIV, idCopy, idSound, idCamera, idCopyRS, idSoundRS;
+    private ImageView micIV, idCopy, idSound, idCamera, idCopyRS, idSoundRS,share;
     private MaterialButton translateBtn;
     private TextView translatedTV;
     private TextToSpeech voice;
@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
         //sao chép
         idCopyRS = view.findViewById(R.id.idCopyRS);
         idSoundRS = view.findViewById(R.id.idSoundRS);
-
+        share = view.findViewById(R.id.share);
         // Check camera permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -172,6 +172,17 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Đã sao chép", Toast.LENGTH_SHORT).show();
             }
         });
+        //share
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, translatedTV.getText().toString() );
+                startActivity(Intent.createChooser(intent, "Chia sẻ qua"));
+            }
+        });
         // hiển thị danh sách ngôn ngữ
         fromSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -207,9 +218,6 @@ public class HomeFragment extends Fragment {
         translateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                idCopyRS.setVisibility(View.VISIBLE);
-                idSoundRS.setVisibility(View.VISIBLE);
-                translatedTV.setVisibility(View.VISIBLE);
                 translatedTV.setText("");
                 if (textInput.getText().toString().isEmpty()) {
                     Toast.makeText(requireContext(), "Vui lòng nhập nội dung", Toast.LENGTH_SHORT).show();
@@ -218,6 +226,10 @@ public class HomeFragment extends Fragment {
                 } else if (toLanguageCode == 0) {
                     Toast.makeText(requireContext(), "Vui lòng chọn ngôn ngữ cần dịch", Toast.LENGTH_SHORT).show();
                 } else {
+                    idCopyRS.setVisibility(View.VISIBLE);
+                    idSoundRS.setVisibility(View.VISIBLE);
+                    translatedTV.setVisibility(View.VISIBLE);
+                    share.setVisibility(View.VISIBLE);
                     transientText(fromLanguageCode, toLanguageCode, textInput.getText().toString());
                 }
             }

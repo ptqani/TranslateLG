@@ -13,4 +13,23 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <!--    dark mode-->
+    <style name="SCREEN">
+        <item name="android:background">#232323</item>
+    </style>
+
+    <style name="BOX">
+        <item name="android:background">#3B3B3B</item>
+    </style>
+    <!--    text mode-->
+    <style name="TEXT">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="SWITCH">
+        <item name="android:background">#B9BABA</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    <style name="IMGVIEW">
+        <item name="android:tint">#FFFFFF</item>
+    </style>
 </resources>

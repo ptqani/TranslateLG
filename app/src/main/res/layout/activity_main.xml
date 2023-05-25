@@ -19,7 +19,7 @@
         app:itemIconTint="@color/custom_color_bottom"
         app:itemTextColor="@color/custom_color_bottom"
         app:menu="@menu/menu_item"
-        app:itemBackground="@color/purple_200"
+        android:background="#2D2698"
         />
 
 </RelativeLayout>

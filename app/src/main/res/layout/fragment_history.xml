@@ -4,7 +4,8 @@
     android:id="@+id/fmHistory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HistoryFragment">
+    tools:context=".HistoryFragment"
+    style="@style/SCREEN">
 
 
     <LinearLayout
@@ -26,16 +27,18 @@
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
             android:text="TRANSLATE LG HISTORY"
-            android:textColor="@color/black"
+
             android:textSize="23sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="@style/TEXT"/>
 
 
         <TextView
             android:id="@+id/idTVHistoryTV"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_margin="20dp" />
+            android:layout_margin="20dp"
+            style="@style/TEXT"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -4,12 +4,42 @@
     android:id="@+id/fmSetting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingFragment">
+    tools:context=".SettingFragment"
+    style="@style/SCREEN"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Mang 3" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/languages" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="4dp"
+            android:text="TRANSLATE LG"
+
+            android:textSize="23sp"
+            android:textStyle="bold"
+            style="@style/TEXT"/>
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Dark mode"
+            android:layout_margin="20dp"
+            android:textSize="20sp"
+
+            style="@style/SWITCH" />
+    </LinearLayout>
 
 </FrameLayout>

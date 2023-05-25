@@ -7,13 +7,19 @@
     <item
         android:id="@+id/history"
         android:icon="@drawable/ic_history"
-        android:title="History" />
+        android:title="History"
+
+        />
     <item
         android:id="@+id/speak"
         android:icon="@drawable/ic_speak"
-        android:title="@string/Speak" />
+        android:title="@string/Speak"
+
+        />
     <item
         android:id="@+id/setting"
         android:icon="@drawable/ic_setting"
-        android:title="@string/Setting" />
+        android:title="@string/Setting"
+
+        />
 </menu>
