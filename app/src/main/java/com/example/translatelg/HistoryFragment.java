@@ -26,6 +26,16 @@ public class HistoryFragment extends Fragment {
         tvHistory = view.findViewById(R.id.tvHistory);
         // Inflate the layout for this fragment
 
+        // Lấy dữ liệu từ Bundle
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            String text = bundle.getString("text");
+            String doneText = bundle.getString("doneText");
+            // Sử dụng dữ liệu đã chuyển đến đây
+            updateTranslationHistory(text,doneText);
+        }
+        showTranslationHistory();
+
         return view;
     }
 
