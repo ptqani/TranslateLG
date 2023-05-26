@@ -17,6 +17,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.speech.RecognizerIntent;
@@ -70,7 +71,7 @@ public class HomeFragment extends Fragment {
     private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
     private TextView tvHistory;
 
-    HistoryFragment historyFragment;
+    HistoryFragment historyFragment = new HistoryFragment();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,7 +99,6 @@ public class HomeFragment extends Fragment {
         idSoundRS = view.findViewById(R.id.idSoundRS);
         share = view.findViewById(R.id.share);
 
-        historyFragment = HistoryFragment.newInstance();
         tvHistory = view.findViewById(R.id.tvHistory2);
 
         // Check camera permission
@@ -331,9 +331,15 @@ public class HomeFragment extends Fragment {
                                     @Override
                                     public void onSuccess(String translated) {
                                         translatedTV.setText(translated);
-
-                                        updateTranslationHistory(text, translated);
-//                                        historyFragment.updateTranslationHistory(text, translated);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("text", text);
+                                        bundle.putString("doneText", translated);
+                                        historyFragment.setArguments(bundle);
+                                        // Thay thế Fragment hiện tại bằng Fragment 2 trong Activity
+                                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                        transaction.replace(R.id.container, historyFragment);
+                                        transaction.addToBackStack(null); // Đưa Fragment vào back stack (nếu muốn)
+                                        transaction.commit();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
