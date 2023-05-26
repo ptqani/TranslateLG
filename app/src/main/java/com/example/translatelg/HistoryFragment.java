@@ -1,8 +1,11 @@
 package com.example.translatelg;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -14,16 +17,17 @@ import java.util.ArrayList;
 
 
 public class HistoryFragment extends Fragment {
-    private TextView tvHistory;
+    private RecyclerView rvHistory;
 
     // Khởi tạo danh sách lịch sử dịch
     private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
-        tvHistory = view.findViewById(R.id.tvHistory);
+        rvHistory = view.findViewById(R.id.rvHistory);
         // Inflate the layout for this fragment
 
         // Lấy dữ liệu từ Bundle
@@ -51,18 +55,18 @@ public class HistoryFragment extends Fragment {
     // Phương thức hiển thị lịch sử dịch
     private void showTranslationHistory() {
         if (translationHistory.isEmpty()) {
-            tvHistory.setVisibility(View.GONE);
+            rvHistory.setVisibility(View.GONE);
         } else {
-            tvHistory.setVisibility(View.VISIBLE);
-            // Hiển thị toàn bộ lịch sử dịch
-            StringBuilder historyText = new StringBuilder();
-            for (Pair<String, String> entry : translationHistory) {
-                String sourceText = entry.first;
-                String translation = entry.second;
-                String historyEntry = "From: " + sourceText + " - To: " + translation + "\n";
-                historyText.append(historyEntry);
-            }
-            tvHistory.setText(historyText.toString());
+            rvHistory.setVisibility(View.VISIBLE);
+
+
+            // Thiết lập RecyclerView
+            LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
+            rvHistory.setLayoutManager(layoutManager);
+
+            // Thiết lập adapter
+            TranslationHistoryAdapter adapter = new TranslationHistoryAdapter(translationHistory);
+            rvHistory.setAdapter(adapter);
         }
     }
 
