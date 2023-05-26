@@ -67,6 +67,11 @@ public class HomeFragment extends Fragment {
     private static final int REQUES_PERMISSON_CODE = 1;
     private int fromLanguageCode, toLanguageCode = 0;
 
+    private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
+    private TextView tvHistory;
+
+    HistoryFragment historyFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,6 +97,10 @@ public class HomeFragment extends Fragment {
         idCopyRS = view.findViewById(R.id.idCopyRS);
         idSoundRS = view.findViewById(R.id.idSoundRS);
         share = view.findViewById(R.id.share);
+
+        historyFragment = HistoryFragment.newInstance();
+        tvHistory = view.findViewById(R.id.tvHistory2);
+
         // Check camera permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -277,6 +286,32 @@ public class HomeFragment extends Fragment {
             }
         }
     }
+    // Phương thức cập nhật lịch sử dịch
+    public void updateTranslationHistory(String sourceText, String translation) {
+        Pair<String, String> historyEntry = new Pair<>(sourceText, translation);
+        translationHistory.add(historyEntry);
+
+        // Hiển thị lịch sử dịch
+        showTranslationHistory();
+    }
+
+    // Phương thức hiển thị lịch sử dịch
+    private void showTranslationHistory() {
+        if (translationHistory.isEmpty()) {
+            tvHistory.setVisibility(View.GONE);
+        } else {
+            tvHistory.setVisibility(View.VISIBLE);
+            // Hiển thị toàn bộ lịch sử dịch
+            StringBuilder historyText = new StringBuilder();
+            for (Pair<String, String> entry : translationHistory) {
+                String sourceText = entry.first;
+                String translation = entry.second;
+                String historyEntry = "From: " + sourceText + " - To: " + translation + "\n";
+                historyText.append(historyEntry);
+            }
+            tvHistory.setText(historyText.toString());
+        }
+    }
 
     private void transientText(int fromLanguageCode, int toLanguageCode, String text) {
         translatedTV.setText("Đang dịch ...");
@@ -297,7 +332,8 @@ public class HomeFragment extends Fragment {
                                     public void onSuccess(String translated) {
                                         translatedTV.setText(translated);
 
-
+                                        updateTranslationHistory(text, translated);
+//                                        historyFragment.updateTranslationHistory(text, translated);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {

@@ -17,16 +17,25 @@ import com.google.firebase.FirebaseApp;
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.nav);
+
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
         FirebaseApp.initializeApp(this);
+
+        // Tạo fragment HistoryFragment và thêm vào container
+        HistoryFragment historyFragment = HistoryFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, historyFragment)
+                .commit();
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -35,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                switch (position){
+                switch (position) {
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.home).setChecked(true);
                         break;
@@ -56,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
                         viewPager.setCurrentItem(0);
                         break;
@@ -72,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.setting:
                         viewPager.setCurrentItem(3);
                         break;
-
-
                 }
                 return true;
             }
