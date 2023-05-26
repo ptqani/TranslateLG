@@ -32,13 +32,12 @@
             android:textStyle="bold"
             style="@style/TEXT"/>
 
-
         <TextView
-            android:id="@+id/idTVHistoryTV"
+            android:id="@+id/tvHistory"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="20dp"
-            style="@style/TEXT"/>
+            android:layout_height="wrap_content" />
+
+
     </LinearLayout>
 
 </FrameLayout>

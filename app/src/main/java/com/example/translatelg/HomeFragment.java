@@ -67,6 +67,8 @@ public class HomeFragment extends Fragment {
     private static final int REQUES_PERMISSON_CODE = 1;
     private int fromLanguageCode, toLanguageCode = 0;
 
+    HistoryFragment historyFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -92,6 +94,9 @@ public class HomeFragment extends Fragment {
         idCopyRS = view.findViewById(R.id.idCopyRS);
         idSoundRS = view.findViewById(R.id.idSoundRS);
         share = view.findViewById(R.id.share);
+
+        historyFragment = HistoryFragment.newInstance();
+
         // Check camera permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
@@ -297,7 +302,7 @@ public class HomeFragment extends Fragment {
                                     public void onSuccess(String translated) {
                                         translatedTV.setText(translated);
 
-
+                                        historyFragment.updateTranslationHistory(text, translated);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
