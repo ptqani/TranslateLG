@@ -1,6 +1,5 @@
 package com.example.translatelg;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +10,6 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,6 @@ public class HistoryFragment extends Fragment {
     // Khởi tạo danh sách lịch sử dịch
     private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
 
-    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +48,9 @@ public class HistoryFragment extends Fragment {
                 "From: " + sourceText + " - To: " + translation,
                 "");
         translationHistory.add(historyEntry);
-        adapter.notifyDataSetChanged();   // Thông báo cho adapter cập nhật lại
+
+        // Thông báo cho adapter cập nhật lại
+        adapter.notifyDataSetChanged();
 
         // Hiển thị lịch sử dịch
         showTranslationHistory();
@@ -75,9 +74,5 @@ public class HistoryFragment extends Fragment {
         }
     }
 
-    // tạo một tham chiếu đến HistoryFragment hiện tại:
-    public static HistoryFragment newInstance() {
-        return new HistoryFragment();
-    }
 
 }

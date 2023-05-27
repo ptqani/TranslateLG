@@ -30,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         FirebaseApp.initializeApp(this);
 
-        // Tạo fragment HistoryFragment và thêm vào container
-        HistoryFragment historyFragment = HistoryFragment.newInstance();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, historyFragment)
-                .commit();
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
