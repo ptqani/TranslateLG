@@ -5,23 +5,40 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     BottomNavigationView bottomNavigationView;
+    RecyclerView recyclerView;
+    FloatingActionButton add_button;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        recyclerView = findViewById(R.id.recyclerView);
+        add_button = findViewById(R.id.add_button);
+        add_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+          Intent intent = new Intent(MainActivity.this,SpeakFragment.class);
+          startActivities(intent);
+            }
+        });
 
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.nav);
