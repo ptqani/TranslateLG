@@ -307,10 +307,7 @@ public class HomeFragment extends Fragment {
                                         bundle.putString("doneText", translated);
                                         historyFragment.setArguments(bundle);
                                         // Thay thế Fragment hiện tại bằng Fragment 2 trong Activity
-                                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                        transaction.replace(R.id.container, historyFragment);
-                                        transaction.addToBackStack(null); // Đưa Fragment vào back stack (nếu muốn)
-                                        transaction.commit();
+                                        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, historyFragment).commit();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
