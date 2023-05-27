@@ -14,6 +14,7 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
 
     private List<Pair<String, String>> translationHistory;
 
+
     public TranslationHistoryAdapter(List<Pair<String, String>> translationHistory) {
         this.translationHistory = translationHistory;
     }
@@ -24,16 +25,14 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Pair<String, String> entry = translationHistory.get(position);
+
         holder.sourceTextView.setText(entry.first);
         holder.translationTextView.setText(entry.second);
-    }
-
-    @Override
-    public int getItemCount() {
-        return translationHistory.size();
+        holder.translationTextView.setVisibility(View.VISIBLE);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -46,4 +45,12 @@ public class TranslationHistoryAdapter extends RecyclerView.Adapter<TranslationH
             translationTextView = itemView.findViewById(R.id.translation_text);
         }
     }
+
+
+    @Override
+    public int getItemCount() {
+        return translationHistory.size();
+    }
+
+
 }

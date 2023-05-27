@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class HistoryFragment extends Fragment {
     private RecyclerView rvHistory;
 
+    private TranslationHistoryAdapter adapter;
+
     // Khởi tạo danh sách lịch sử dịch
     private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
 
@@ -28,7 +30,7 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         rvHistory = view.findViewById(R.id.rvHistory);
-        // Inflate the layout for this fragment
+        adapter = new TranslationHistoryAdapter(translationHistory);
 
         // Lấy dữ liệu từ Bundle
         Bundle bundle = getArguments();
@@ -36,7 +38,7 @@ public class HistoryFragment extends Fragment {
             String text = bundle.getString("text");
             String doneText = bundle.getString("doneText");
             // Sử dụng dữ liệu đã chuyển đến đây
-            updateTranslationHistory(text,doneText);
+            updateTranslationHistory(text, doneText);
         }
         showTranslationHistory();
 
@@ -45,8 +47,11 @@ public class HistoryFragment extends Fragment {
 
     // Phương thức cập nhật lịch sử dịch
     public void updateTranslationHistory(String sourceText, String translation) {
-        Pair<String, String> historyEntry = new Pair<>(sourceText, translation);
+        Pair<String, String> historyEntry = new Pair<>(
+                "From: " + sourceText + " - To: " + translation,
+                "");
         translationHistory.add(historyEntry);
+        adapter.notifyDataSetChanged();   // Thông báo cho adapter cập nhật lại
 
         // Hiển thị lịch sử dịch
         showTranslationHistory();
