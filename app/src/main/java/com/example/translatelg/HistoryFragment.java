@@ -1,8 +1,6 @@
 package com.example.translatelg;
 
-
 import android.database.Cursor;
-
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -26,14 +23,6 @@ public class HistoryFragment extends Fragment {
   ArrayList<String> historyid,text, textts;
   CustomAdapter customAdapter;
     private RecyclerView rvHistory;
-
-
-    private TranslationHistoryAdapter adapter;
-
-    // Khởi tạo danh sách lịch sử dịch
-    private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,23 +45,6 @@ public class HistoryFragment extends Fragment {
         });
         return view;
     }
-
-
-    // Phương thức cập nhật lịch sử dịch
-    public void updateTranslationHistory(String sourceText, String translation) {
-        Pair<String, String> historyEntry = new Pair<>(
-                "From: " + sourceText + " - To: " + translation,
-                "");
-        translationHistory.add(historyEntry);
-
-        // Thông báo cho adapter cập nhật lại
-        adapter.notifyDataSetChanged();
-
-        // Hiển thị lịch sử dịch
-        showTranslationHistory();
-    }
-
-
     // Phương thức hiển thị lịch sử dịch
     private void showTranslationHistory() {
         Cursor cursor = dbHelper.readAllData();
@@ -87,7 +59,6 @@ public class HistoryFragment extends Fragment {
             }
         }
     }
-
     private void deleteAllData() {
         dbHelper.deleteAllData();
         historyid.clear();
@@ -96,5 +67,4 @@ public class HistoryFragment extends Fragment {
         customAdapter.notifyDataSetChanged();
         Toast.makeText(getContext(), "Đã xóa tất cả dữ liệu", Toast.LENGTH_SHORT).show();
     }
-
 }
