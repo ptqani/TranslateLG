@@ -33,9 +33,10 @@ public class HistoryFragment extends Fragment {
         historyid = new ArrayList<>();
         text = new ArrayList<>();
         textts = new ArrayList<>();
-        showTranslationHistory();
-        customAdapter = new CustomAdapter(getContext(),historyid,text,textts);
-        rvHistory.setAdapter( customAdapter);
+
+        showTranslationHistory(); // Load and display the data
+        customAdapter = new CustomAdapter(getContext(), historyid, text, textts);
+        rvHistory.setAdapter(customAdapter);
         rvHistory.setLayoutManager(new LinearLayoutManager(getContext()));
         delete_data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +58,7 @@ public class HistoryFragment extends Fragment {
                 textts.add(cursor.getString(2));
 
             }
+
         }
     }
     private void deleteAllData() {
