@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
 
 
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
