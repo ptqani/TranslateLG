@@ -70,7 +70,7 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
 
-    HistoryFragment historyFragment = new HistoryFragment();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -302,15 +302,8 @@ public class HomeFragment extends Fragment {
                                     @Override
                                     public void onSuccess(String translated) {
                                         translatedTV.setText(translated);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("text", text);
-                                        bundle.putString("doneText", translated);
-                                        historyFragment.setArguments(bundle);
-                                        // Thay thế Fragment hiện tại bằng Fragment 2 trong Activity
-                                        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                        transaction.replace(R.id.container, historyFragment);
-                                        transaction.addToBackStack(null); // Đưa Fragment vào back stack (nếu muốn)
-                                        transaction.commit();
+                                        DBHelper dbHelper = new DBHelper(getContext());
+                                        dbHelper.insertTranslation(text, translated);
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {

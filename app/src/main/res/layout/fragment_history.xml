@@ -20,6 +20,13 @@
         android:textSize="23sp"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/deleteHis"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="250dp"
+        android:text="Xóa lịch sử" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvHistory"
         android:layout_width="match_parent"
