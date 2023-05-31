@@ -95,19 +95,19 @@ public class HomeFragment extends Fragment {
         idSoundRS = view.findViewById(R.id.idSoundRS);
         share = view.findViewById(R.id.share);
 
-        // Check camera permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (getContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.CAMERA}, 101);
+        // Kiểm tra quyền của máy ảnh
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//kiểm tra xem phiên bản SDK của hệ điều hành Android có lớn hơn hoặc bằng phiên bản 6.0 (M) hay không
+            if (getContext().checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {//kiểm tra xem ứng dụng đã được cấp quyền sử dụng camera chưa
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, 101);//hàm dùng để yêu cầu cấp quyền, mã yêu cầu là 101
             }
         }
 
-        // Camera button click listener
+        // bắt sự kiện nút máy ảnh
         idCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 101);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//yêu cầu hệ thống khởi máy ảnh
+                startActivityForResult(intent, 101);//khởi động Intent và đợi kết quả trả về từ ứng dụng máy ảnh
             }
         });
 
