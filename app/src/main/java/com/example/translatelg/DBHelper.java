@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }
-
+// Tạo bảng
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TRANSLATION_HISTORY_TABLE = "CREATE TABLE " + TABLE_TRANSLATION_HISTORY + "("
@@ -92,7 +92,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    //xóa bảng
+    //xóa tất cả dữ liệu trong bảng
     public void deleteAllDataTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_TRANSLATION_HISTORY);

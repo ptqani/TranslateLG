@@ -111,7 +111,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Text-to-speech initialization
         // phát âm giọng nói
         // tạo một đối tượng TextToSpeech để thực hiện chức năng phát âm giọng nói
         voice = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
@@ -141,7 +140,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        // Speak button click listener
         //được sử dụng để xử lý sự kiện click trên một button có id
         idSound.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,7 +152,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Speak translated button click listener
+
         idSoundRS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,7 +161,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Copy button click listener
+
         // copy văn bản
         idCopy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,7 +178,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Copy translated button click listener
+        // copy văn bản
         idCopyRS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
