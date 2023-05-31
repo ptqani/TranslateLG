@@ -111,7 +111,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Text-to-speech initialization
+       
         // phát âm giọng nói
         // tạo một đối tượng TextToSpeech để thực hiện chức năng phát âm giọng nói
         voice = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {

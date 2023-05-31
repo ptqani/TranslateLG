@@ -15,7 +15,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Tạo một Handler và chuyển đến MainActivity sau độ trễ
+        // Tạo một Handler giao tiêp giao diên, postdelay tạo độ trễ,runnable đại diện tác vụ
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -23,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
+            // thêm độ trễ chuyển trang
         }, SPLASH_TIME_OUT);
     }
 }
