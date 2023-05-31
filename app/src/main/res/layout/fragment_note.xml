@@ -1,7 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+
+    >
 
     <ImageView
         android:layout_width="40dp"
@@ -17,22 +20,31 @@
         android:layout_gravity="center"
         android:layout_marginStart="4dp"
         android:layout_marginTop="10dp"
-        android:text="TRANSLATE LG HISTORY"
+        android:text="TRANSLATE LG NOTE"
         android:textSize="23sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/deleteHis"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="250dp"
-        android:text="Xóa lịch sử" />
-
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvHistory"
+        android:id="@+id/rvNote"
         style="@style/TEXT"
         android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:paddingTop="?attr/actionBarSize">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize" />
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:clickable="true"
+            app:srcCompat="@drawable/ic_add" />
+    </LinearLayout>
 
 </LinearLayout>

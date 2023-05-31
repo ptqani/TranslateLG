@@ -55,7 +55,7 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     private Spinner fromSpinner, toSpinner;
     private TextInputEditText textInput;
-    private ImageView micIV, idCopy, idSound, idCamera, idCopyRS, idSoundRS,share;
+    private ImageView micIV, idCopy, idSound, idCamera, idCopyRS, idSoundRS, share;
     private MaterialButton translateBtn;
     private TextView translatedTV;
     private TextToSpeech voice;
@@ -67,9 +67,6 @@ public class HomeFragment extends Fragment {
     };
     private static final int REQUES_PERMISSON_CODE = 1;
     private int fromLanguageCode, toLanguageCode = 0;
-
-    private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
-
 
 
     @Override
@@ -185,7 +182,7 @@ public class HomeFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, translatedTV.getText().toString() );
+                intent.putExtra(Intent.EXTRA_TEXT, translatedTV.getText().toString());
                 startActivity(Intent.createChooser(intent, "Chia sẻ qua"));
             }
         });
