@@ -258,25 +258,27 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
+    //nhận dạng văn bản trên một hình ảnh bằng cách sử dụng Firebase ML Kit.
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUES_PERMISSON_CODE) {
             if (resultCode == Activity.RESULT_OK && data != null) {
-                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);//lấy danh sách các kết quả từ hoạt động nhận dạng giọng nói
                 textInput.setText(result.get(0));
             }
-        } else if (requestCode == 101 && resultCode == RESULT_OK) {
+        } else if (requestCode == 101 && resultCode == RESULT_OK) {//kiểm tra kết quả trả về của một hoạt động yêu cầu chụp ảnh
             Bundle bundle = data.getExtras();
             if (bundle != null) {
-                Bitmap bitmap = (Bitmap) bundle.get("data");
+                Bitmap bitmap = (Bitmap) bundle.get("data");//sử dụng đối tượng Bundle để lấy dữ liệu trả về và chuyển đổi ảnh thành đối tượng Bitmap
                 if (bitmap != null) {
-                    FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap);
+                    FirebaseVisionImage firebaseVisionImage = FirebaseVisionImage.fromBitmap(bitmap); //tạo FirebaseVisionImage từ bitmap
                     FirebaseVision firebaseVision = FirebaseVision.getInstance();
-                    FirebaseVisionTextRecognizer firebaseVisionTextRecognizer = firebaseVision.getOnDeviceTextRecognizer();
-                    Task<FirebaseVisionText> task = firebaseVisionTextRecognizer.processImage(firebaseVisionImage);
+                    FirebaseVisionTextRecognizer firebaseVisionTextRecognizer = firebaseVision.getOnDeviceTextRecognizer();//sử dụng OnDeviceTextRecognizer từ FirebaseVision để xử lý ảnh và trích xuất văn bản trong ảnh đó
+                    Task<FirebaseVisionText> task = firebaseVisionTextRecognizer.processImage(firebaseVisionImage);//tạo task xử lý hình ảnh và nhận dạng văn bản trong đó
+                    //Nếu tác vụ trong task thành công, listener sẽ được gọi onSuccess và xử lý kết quả
                     task.addOnSuccessListener(new OnSuccessListener<FirebaseVisionText>() {
+
                         @Override
                         public void onSuccess(FirebaseVisionText firebaseVisionText) {
                             String text = firebaseVisionText.getText();
@@ -284,14 +286,15 @@ public class HomeFragment extends Fragment {
                                 @Override
                                 public void run() {
                                     textInput.setText(text);
-                                }
+                                } //cập nhật văn bản
                             });
                         }
                     });
+                    // Nếu tác vụ trong task thất bại, listener sẽ được gọi onFailure và hiển thị một thông báo lỗi trên màn hình
                     task.addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();//hiển thị một thông báo lỗi trên màn hình
                         }
                     });
                 }
