@@ -166,11 +166,11 @@ public class HomeFragment extends Fragment {
         idCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // // đối tượng dc khởi tạo bằng cách gọi phương thức từ require, clipboarmanager dc sử dụng để qaun lý nội dung bộ nhớ tạm
+                // // đối tượng dc khởi tạo bằng cách gọi phương thức từ require, clipboarmanager dc sử dụng để quan lý nội dung bộ nhớ tạm
                 ClipboardManager clipboardManager = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 //một đối tượng ClipData mới được tạo bằng cách gọi phương thức newPlainText
                 ClipData clipData = ClipData.newPlainText("Sao chép", textInput.getText().toString());
-                // Đối tượng ClipData này chứa dữ liệu văn bản cần sao chép và một nhãn (label) để nhận dạng nội dung trong clipboard.
+                // Đối tượng ClipData này chứa dữ liệu văn bản cần sao chép
                 clipboardManager.setPrimaryClip(clipData);
                 //văn bản được sao chép từ textInput sẽ được đặt vào clipboard để có thể dán vào các ứng dụng khác.
                 Toast.makeText(getContext(), "Đã sao chép", Toast.LENGTH_SHORT).show();
@@ -192,10 +192,15 @@ public class HomeFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // tạo đt intent thực hiện hoạt động chia sẻ dl ,..
                 Intent intent = new Intent();
+                // xác định hđ là gửi dl
                 intent.setAction(Intent.ACTION_SEND);
+                // đặt dl là dòng vb
                 intent.setType("text/plain");
+                // gắn thêm dl vào itent, nội dung văn bản từ textview
                 intent.putExtra(Intent.EXTRA_TEXT, translatedTV.getText().toString());
+                // chạy hd androi chọn ứng dụng chia sẻ , với tiêu đề
                 startActivity(Intent.createChooser(intent, "Chia sẻ qua"));
             }
         });
