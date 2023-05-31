@@ -98,7 +98,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM " + TABLE_TRANSLATION_HISTORY);
         db.close();
     }
-
+// cập nhật ghi chú
     public void UpdateDataNote(String rowid, String source_title, String context_text) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -107,7 +107,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.update(TABLE_TRANSLATION_NOTE, values, "id=?", new String[]{rowid});
         db.close();
     }
-
+// xóa ghi chú
     public void DeleteDataNote(String rowid) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_TRANSLATION_NOTE, "id=?", new String[]{rowid});

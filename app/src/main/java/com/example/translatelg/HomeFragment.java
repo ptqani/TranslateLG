@@ -212,14 +212,14 @@ public class HomeFragment extends Fragment {
             }
         });
         //hiển thị vào khung
-        ArrayAdapter fromAdapter = new ArrayAdapter(requireContext(), R.layout.spinner_item, fromLanguages);
-        fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter fromAdapter = new ArrayAdapter(requireContext(), R.layout.spinner_item, fromLanguages);// tạo mới adpter mục trong spiner
+        fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // hiển thị mục thả xuống của Spinner.
         fromSpinner.setAdapter(fromAdapter);
         //hiển thị danh sách ngôn ngữ cần dịch
         toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                toLanguageCode = getLanguageCode(toLanguages[i]);
+                toLanguageCode = getLanguageCode(toLanguages[i]); //lấy ngôn ngữ
             }
 
             @Override
@@ -231,6 +231,7 @@ public class HomeFragment extends Fragment {
         ArrayAdapter toAdapter = new ArrayAdapter(requireContext(), R.layout.spinner_item, toLanguages);
         toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toSpinner.setAdapter(toAdapter);
+        //sự kiện nhấn nút dịch
         translateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -299,18 +300,18 @@ public class HomeFragment extends Fragment {
 
     private void transientText(int fromLanguageCode, int toLanguageCode, String text) {
         translatedTV.setText("Đang dịch ...");
-        FirebaseTranslatorOptions options = new FirebaseTranslatorOptions.Builder()
+        FirebaseTranslatorOptions options = new FirebaseTranslatorOptions.Builder()// cấu hình
                 .setSourceLanguage(fromLanguageCode)
                 .setTargetLanguage(toLanguageCode)
                 .build();
-        FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance().getTranslator(options);
-        FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder().build();
-        translator.downloadModelIfNeeded(conditions)
+        FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance().getTranslator(options); //Cấu hình
+        FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder().build();// tải xuống ngôn ngữ
+        translator.downloadModelIfNeeded(conditions)// tiến hành tải
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         translatedTV.setText("Đang dịch...");
-                        translator.translate(text)
+                        translator.translate(text) //gọi pt của đối tượng translator
                                 .addOnSuccessListener(new OnSuccessListener<String>() {
                                     @Override
                                     public void onSuccess(String translated) {
@@ -380,26 +381,6 @@ public class HomeFragment extends Fragment {
                 languageCode = 0;
         }
         return languageCode;
-    }
-
-    private String getLanguageFromCode(int languageCode) {
-        String language = "";
-        switch (languageCode) {
-            case FirebaseTranslateLanguage.AF:
-                language = "Afrikaans";
-                break;
-            case FirebaseTranslateLanguage.EN:
-                language = "English";
-                break;
-            case FirebaseTranslateLanguage.ES:
-                language = "Spanish";
-                break;
-            case FirebaseTranslateLanguage.FR:
-                language = "French";
-                break;
-            // Thêm các case cho các ngôn ngữ khác
-        }
-        return language;
     }
 
 
