@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -15,16 +16,16 @@
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/nav"/>
+        android:layout_above="@+id/nav" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#2D2698"
         app:itemIconTint="@color/custom_color_bottom"
         app:itemTextColor="@color/custom_color_bottom"
-        app:menu="@menu/menu_item"
-        android:background="#2D2698"
-        />
+        app:menu="@menu/menu_item" />
 
 </RelativeLayout>

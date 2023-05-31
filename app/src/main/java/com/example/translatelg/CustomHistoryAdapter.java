@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
+public class CustomHistoryAdapter extends RecyclerView.Adapter<CustomHistoryAdapter.MyViewHolder> {
     Context context;
     private ArrayList<String> historyid, text, textts;
 
-    CustomAdapter(Context context, ArrayList historyid, ArrayList text, ArrayList textts) {
+    CustomHistoryAdapter(Context context, ArrayList historyid, ArrayList text, ArrayList textts) {
         this.context = context;
         this.historyid = historyid;
         this.text = text;
@@ -31,7 +31,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CustomHistoryAdapter.MyViewHolder holder, int position) {
         int reversePosition = getItemCount() - position - 1;
         holder.historyid.setText(historyid.get(reversePosition));
         holder.histori_id_to.setText(text.get(reversePosition));
@@ -45,10 +45,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView historyid, histori_id_to, histori_id_from;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             historyid = itemView.findViewById(R.id.histori_id);
-            histori_id_to = itemView.findViewById(R.id.histori_id_to);
+            histori_id_to = itemView.findViewById(R.id.note_id);
             histori_id_from = itemView.findViewById(R.id.histori_id_from);
         }
     }
