@@ -87,13 +87,13 @@ public class HomeFragment extends Fragment {
         translateBtn = view.findViewById(R.id.idBtnTraslate);
         //hiển thị kq
         translatedTV = view.findViewById(R.id.idTVTranslateTV);
-        //sao chép
+        //sao chép, tạo sự kiện trở trang layout
         idCopy = view.findViewById(R.id.idCopy);
         //chuyển văn bản thành giọng nói
         idSound = view.findViewById(R.id.idSound);
         //camera
         idCamera = view.findViewById(R.id.idCamera);
-        //sao chép
+        //sao chép tạo sự kiện trở trang layout
         idCopyRS = view.findViewById(R.id.idCopyRS);
         idSoundRS = view.findViewById(R.id.idSoundRS);
         share = view.findViewById(R.id.share);
@@ -115,11 +115,16 @@ public class HomeFragment extends Fragment {
         });
 
         // Text-to-speech initialization
+        // phát âm giọng nói
+        // tạo một đối tượng TextToSpeech để thực hiện chức năng phát âm giọng nói
         voice = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            //truyền hai tham số lấy thôn tin và lắng nghe sự kiện
             @Override
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
+                    // ko xãi ra lỗi
                     voice.setLanguage(Locale.ENGLISH);
+                    // thì thiết lập pt
                 }
             }
         });
@@ -140,11 +145,15 @@ public class HomeFragment extends Fragment {
             }
         });
         // Speak button click listener
+        //được sử dụng để xử lý sự kiện click trên một button có id
         idSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // biến text gán bằng nội dung văn bản từ giao diện thông qua
                 String text = textInput.getText().toString();
                 voice.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                // phát âm giọng nói speak(), text nd văn bản, phát âm từ đầu,theo dõi quá trình phát âm
+
             }
         });
 
@@ -158,13 +167,19 @@ public class HomeFragment extends Fragment {
         });
 
         // Copy button click listener
+        // copy văn bản
         idCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // // đối tượng dc khởi tạo bằng cách gọi phương thức từ require, clipboarmanager dc sử dụng để qaun lý nội dung bộ nhớ tạm
                 ClipboardManager clipboardManager = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                //một đối tượng ClipData mới được tạo bằng cách gọi phương thức newPlainText
                 ClipData clipData = ClipData.newPlainText("Sao chép", textInput.getText().toString());
+                // Đối tượng ClipData này chứa dữ liệu văn bản cần sao chép và một nhãn (label) để nhận dạng nội dung trong clipboard.
                 clipboardManager.setPrimaryClip(clipData);
+                //văn bản được sao chép từ textInput sẽ được đặt vào clipboard để có thể dán vào các ứng dụng khác.
                 Toast.makeText(getContext(), "Đã sao chép", Toast.LENGTH_SHORT).show();
+                // tb sao chép thành công
             }
         });
 

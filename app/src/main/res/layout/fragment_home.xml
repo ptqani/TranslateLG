@@ -125,11 +125,11 @@
 
             <ImageView
                 android:id="@+id/idCamera"
+                style="@style/IMGVIEW"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_camera"
-                style="@style/IMGVIEW"/>
+                app:srcCompat="@drawable/ic_camera" />
 
             <ImageView
                 android:id="@+id/idIVMic"
@@ -142,12 +142,11 @@
 
             <ImageView
                 android:id="@+id/idSound"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_sound"
                 style="@style/IMGVIEW"
-                />
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                app:srcCompat="@drawable/ic_sound" />
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
