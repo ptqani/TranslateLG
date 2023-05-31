@@ -27,11 +27,12 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         rvHistory = view.findViewById(R.id.rvHistory);
         delete_data = view.findViewById(R.id.deleteHis);
+        //Khởi tạo đối tượng dbHelper và danh sách lịch sử dịch
         dbHelper = new DBHelper(getContext());
         historyid = new ArrayList<>();
         text = new ArrayList<>();
         textts = new ArrayList<>();
-
+        // Tạo và thiết lập CustomAdapter cho RecyclerView
         customAdapter = new CustomAdapter(getContext(), historyid, text, textts);
         rvHistory.setAdapter(customAdapter);
         rvHistory.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -57,14 +58,11 @@ public class HistoryFragment extends Fragment {
      // tải dữ liệu lịch sử dịch từ cơ sở dữ liệu vào các danh sách
     private void loadData() {
         Cursor cursor = dbHelper.readAllData(); // Lấy dữ liệu từ cơ sở dữ liệu
-        if (cursor.getCount() == 0) {
-            Toast.makeText(getContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
-        } else {
+            // duyệt qua từng dòng dữ liệu
             while (cursor.moveToNext()) {
                 historyid.add(cursor.getString(0)); // Thêm ID vào danh sách lịch sử
                 text.add(cursor.getString(1)); // Thêm văn bản gốc vào danh sách lịch sử
                 textts.add(cursor.getString(2)); // Thêm văn bản dịch vào danh sách lịch sử
-            }
         }
     }
 

@@ -303,6 +303,7 @@ public class HomeFragment extends Fragment {
                                     public void onSuccess(String translated) {
                                         translatedTV.setText(translated);
                                         DBHelper dbHelper = new DBHelper(getContext());
+                                        // Thêm bản dịch vào cơ sở dữ liệu
                                         dbHelper.insertTranslation(text, translated);
                                     }
                                 })
