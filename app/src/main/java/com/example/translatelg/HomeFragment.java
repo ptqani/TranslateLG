@@ -112,16 +112,12 @@ public class HomeFragment extends Fragment {
         });
 
 
-        // phát âm giọng nói
-        // tạo một đối tượng TextToSpeech để thực hiện chức năng phát âm giọng nói
-        voice = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
-            //truyền hai tham số lấy thôn tin và lắng nghe sự kiện
+        //  chuyển văn bản thành giọng nói
+        voice = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {//khởi tạo TextToSpeech và cấu hình chuyển đổi văn bản thành giọng nói
             @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    // ko xãi ra lỗi
-                    voice.setLanguage(Locale.ENGLISH);
-                    // thì thiết lập pt
+            public void onInit(int status) {//gọi phươn thức này khi TextToSpeech xảy ra
+                if (status != TextToSpeech.ERROR) {// kiểm tra thành công ko
+                    voice.setLanguage(Locale.ENGLISH);//TextToSpeech được đặt là Locale.ENGLISH
                 }
             }
         });
@@ -129,15 +125,15 @@ public class HomeFragment extends Fragment {
         micIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-                i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Nói gì đó...");
+                Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);// sử dụng  một hoạt động nhận dạng giọng nói
+                i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);//thiết lập ngôn ngữ sử dụng  nhận dạng giọng nói một cách tự do
+                i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());//sử dụng ngôn ngữ được thiết lập trên thiết bị để thực hiện nhiệm vụ nhận dạng giọng nói
+                i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Nói gì đó..."); // thông báo cho người dùng trước khi họ bắt đầu nói
                 try {
-                    startActivityForResult(i, REQUES_PERMISSON_CODE);
+                    startActivityForResult(i, REQUES_PERMISSON_CODE);//yêu cầu quyền và chạy nhận dạng giọng nói
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();// báo lỗi
                 }
             }
         });
@@ -155,7 +151,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-\
         // phát âm thanh đoạn văn bản
         idSoundRS.setOnClickListener(new View.OnClickListener() {
             @Override
