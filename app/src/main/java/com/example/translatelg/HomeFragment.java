@@ -111,6 +111,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
         // phát âm giọng nói
         // tạo một đối tượng TextToSpeech để thực hiện chức năng phát âm giọng nói
         voice = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
@@ -140,6 +141,8 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        // phát âm thanh đoạn văn bản
         //được sử dụng để xử lý sự kiện click trên một button có id
         idSound.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,12 +150,13 @@ public class HomeFragment extends Fragment {
                 // biến text gán bằng nội dung văn bản từ giao diện thông qua
                 String text = textInput.getText().toString();
                 voice.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-                // phát âm giọng nói speak(), text nd văn bản, phát âm từ đầu,theo dõi quá trình phát âm
+                // phát âm giọng nói speak(), text nd văn bản, phát âm ko bị lồng nhau,theo dõi quá trình phát âm
 
             }
         });
 
-
+\
+        // phát âm thanh đoạn văn bản
         idSoundRS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -166,6 +170,8 @@ public class HomeFragment extends Fragment {
         idCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //  khởi tạo bằng cách gọi phương thức từ require, clipboarmanager dc sử dụng để quản lý nội dung bộ nhớ tạm
                 // // đối tượng dc khởi tạo bằng cách gọi phương thức từ require, clipboarmanager dc sử dụng để quan lý nội dung bộ nhớ tạm
                 ClipboardManager clipboardManager = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 //một đối tượng ClipData mới được tạo bằng cách gọi phương thức newPlainText
@@ -178,7 +184,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // copy văn bản
+
+        // copy văn bản sau khi dịch
+
         idCopyRS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

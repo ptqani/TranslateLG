@@ -22,8 +22,10 @@ public class UpdateNoteActivity extends AppCompatActivity {
         contentNoteUp = findViewById(R.id.contentNoteUp);
         buttonAddNoteUp = findViewById(R.id.buttonAddNoteUp);
         buttonDeleteNote = findViewById(R.id.buttonDeleteNote);
+
         getIntenData(); //nhận dữ liệu từ
         //Cập nhật ghi chú
+
         buttonAddNoteUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,7 +37,9 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         // Xóa ghi chú
+
         buttonDeleteNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +51,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
         });
 
     }
+
 //lấy dữ liệu
     void getIntenData() {
         if (getIntent().hasExtra("id") && getIntent().hasExtra("title") && getIntent().hasExtra("content")) {

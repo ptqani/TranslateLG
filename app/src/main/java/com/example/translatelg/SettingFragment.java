@@ -3,17 +3,21 @@ package com.example.translatelg;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
 public class SettingFragment extends Fragment {
-    private Switch switchButton;
-    private SharedPreferences sharedPreferences; // SharedPreferences để lưu trạng thái chế độ ban đêm
-    private SharedPreferences.Editor editor; // Editor để chỉnh sửa SharedPreferences
+
+    private Switch Switch;
+    boolean nightMode;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
