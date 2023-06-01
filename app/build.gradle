@@ -33,10 +33,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-vision:20.0.0'
     implementation 'com.google.firebase:firebase-ml-vision:24.0.3'// cài đặt thư viện Firebase ML Vision
     implementation 'com.google.firebase:firebase-ml-vision-barcode-model:16.1.1'
-    implementation 'com.google.firebase:firebase-core:17.3.0'
-    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.0'
-    implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.7'
-    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.8'
+    implementation 'com.google.firebase:firebase-core:17.3.0' //cấu hình
+    implementation 'com.google.firebase:firebase-ml-natural-language:22.0.0' //xử lí ngôn ngữ
+    implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.7' //phân loại xác định ngôn ngữ đầu vào
+    implementation 'com.google.firebase:firebase-ml-natural-language-translate-model:20.0.8' // dịch văn bản
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'

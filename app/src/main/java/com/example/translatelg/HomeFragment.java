@@ -55,7 +55,7 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     private Spinner fromSpinner, toSpinner;
     private TextInputEditText textInput;
-    private ImageView micIV, idCopy, idSound, idCamera, idCopyRS, idSoundRS,share;
+    private ImageView micIV, idCopy, idSound, idCamera, idCopyRS, idSoundRS, share;
     private MaterialButton translateBtn;
     private TextView translatedTV;
     private TextToSpeech voice;
@@ -67,9 +67,6 @@ public class HomeFragment extends Fragment {
     };
     private static final int REQUES_PERMISSON_CODE = 1;
     private int fromLanguageCode, toLanguageCode = 0;
-
-    private ArrayList<Pair<String, String>> translationHistory = new ArrayList<>();
-
 
 
     @Override
@@ -87,13 +84,13 @@ public class HomeFragment extends Fragment {
         translateBtn = view.findViewById(R.id.idBtnTraslate);
         //hiển thị kq
         translatedTV = view.findViewById(R.id.idTVTranslateTV);
-        //sao chép
+        //sao chép, tạo sự kiện trở trang layout
         idCopy = view.findViewById(R.id.idCopy);
         //chuyển văn bản thành giọng nói
         idSound = view.findViewById(R.id.idSound);
         //camera
         idCamera = view.findViewById(R.id.idCamera);
-        //sao chép
+        //sao chép tạo sự kiện trở trang layout
         idCopyRS = view.findViewById(R.id.idCopyRS);
         idSoundRS = view.findViewById(R.id.idSoundRS);
         share = view.findViewById(R.id.share);
@@ -113,6 +110,7 @@ public class HomeFragment extends Fragment {
                 startActivityForResult(intent, 101);//khởi động Intent và đợi kết quả trả về từ ứng dụng máy ảnh
             }
         });
+
 
         //  chuyển văn bản thành giọng nói
         voice = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {//khởi tạo TextToSpeech và cấu hình chuyển đổi văn bản thành giọng nói
@@ -139,16 +137,21 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-        // Speak button click listener
+
+        // phát âm thanh đoạn văn bản
+        //được sử dụng để xử lý sự kiện click trên một button có id
         idSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // biến text gán bằng nội dung văn bản từ giao diện thông qua
                 String text = textInput.getText().toString();
                 voice.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+                // phát âm giọng nói speak(), text nd văn bản, phát âm ko bị lồng nhau,theo dõi quá trình phát âm
+
             }
         });
 
-        // Speak translated button click listener
+        // phát âm thanh đoạn văn bản
         idSoundRS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,18 +160,28 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Copy button click listener
+
+        // copy văn bản
         idCopy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //  khởi tạo bằng cách gọi phương thức từ require, clipboarmanager dc sử dụng để quản lý nội dung bộ nhớ tạm
+                // // đối tượng dc khởi tạo bằng cách gọi phương thức từ require, clipboarmanager dc sử dụng để quan lý nội dung bộ nhớ tạm
                 ClipboardManager clipboardManager = (ClipboardManager) requireActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                //một đối tượng ClipData mới được tạo bằng cách gọi phương thức newPlainText
                 ClipData clipData = ClipData.newPlainText("Sao chép", textInput.getText().toString());
+                // Đối tượng ClipData này chứa dữ liệu văn bản cần sao chép
                 clipboardManager.setPrimaryClip(clipData);
+                //văn bản được sao chép từ textInput sẽ được đặt vào clipboard để có thể dán vào các ứng dụng khác.
                 Toast.makeText(getContext(), "Đã sao chép", Toast.LENGTH_SHORT).show();
+                // tb sao chép thành công
             }
         });
 
-        // Copy translated button click listener
+
+        // copy văn bản sau khi dịch
+
         idCopyRS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,10 +195,15 @@ public class HomeFragment extends Fragment {
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // tạo đt intent thực hiện hoạt động chia sẻ dl ,..
                 Intent intent = new Intent();
+                // xác định hđ là gửi dl
                 intent.setAction(Intent.ACTION_SEND);
+                // đặt dl là dòng vb
                 intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, translatedTV.getText().toString() );
+                // gắn thêm dl vào itent, nội dung văn bản từ textview
+                intent.putExtra(Intent.EXTRA_TEXT, translatedTV.getText().toString());
+                // chạy hd androi chọn ứng dụng chia sẻ , với tiêu đề
                 startActivity(Intent.createChooser(intent, "Chia sẻ qua"));
             }
         });
@@ -202,14 +220,14 @@ public class HomeFragment extends Fragment {
             }
         });
         //hiển thị vào khung
-        ArrayAdapter fromAdapter = new ArrayAdapter(requireContext(), R.layout.spinner_item, fromLanguages);
-        fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter fromAdapter = new ArrayAdapter(requireContext(), R.layout.spinner_item, fromLanguages);// tạo mới adpter mục trong spiner
+        fromAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // hiển thị mục thả xuống của Spinner.
         fromSpinner.setAdapter(fromAdapter);
         //hiển thị danh sách ngôn ngữ cần dịch
         toSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                toLanguageCode = getLanguageCode(toLanguages[i]);
+                toLanguageCode = getLanguageCode(toLanguages[i]); //lấy ngôn ngữ
             }
 
             @Override
@@ -221,6 +239,7 @@ public class HomeFragment extends Fragment {
         ArrayAdapter toAdapter = new ArrayAdapter(requireContext(), R.layout.spinner_item, toLanguages);
         toAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         toSpinner.setAdapter(toAdapter);
+        //sự kiện nhấn nút dịch
         translateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,23 +308,24 @@ public class HomeFragment extends Fragment {
 
     private void transientText(int fromLanguageCode, int toLanguageCode, String text) {
         translatedTV.setText("Đang dịch ...");
-        FirebaseTranslatorOptions options = new FirebaseTranslatorOptions.Builder()
+        FirebaseTranslatorOptions options = new FirebaseTranslatorOptions.Builder()// cấu hình
                 .setSourceLanguage(fromLanguageCode)
                 .setTargetLanguage(toLanguageCode)
                 .build();
-        FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance().getTranslator(options);
-        FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder().build();
-        translator.downloadModelIfNeeded(conditions)
+        FirebaseTranslator translator = FirebaseNaturalLanguage.getInstance().getTranslator(options); //Cấu hình
+        FirebaseModelDownloadConditions conditions = new FirebaseModelDownloadConditions.Builder().build();// tải xuống ngôn ngữ
+        translator.downloadModelIfNeeded(conditions)// tiến hành tải
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         translatedTV.setText("Đang dịch...");
-                        translator.translate(text)
+                        translator.translate(text) //gọi pt của đối tượng translator
                                 .addOnSuccessListener(new OnSuccessListener<String>() {
                                     @Override
                                     public void onSuccess(String translated) {
                                         translatedTV.setText(translated);
                                         DBHelper dbHelper = new DBHelper(getContext());
+                                        // Thêm bản dịch vào cơ sở dữ liệu
                                         dbHelper.insertTranslation(text, translated);
                                     }
                                 })
@@ -369,26 +389,6 @@ public class HomeFragment extends Fragment {
                 languageCode = 0;
         }
         return languageCode;
-    }
-
-    private String getLanguageFromCode(int languageCode) {
-        String language = "";
-        switch (languageCode) {
-            case FirebaseTranslateLanguage.AF:
-                language = "Afrikaans";
-                break;
-            case FirebaseTranslateLanguage.EN:
-                language = "English";
-                break;
-            case FirebaseTranslateLanguage.ES:
-                language = "Spanish";
-                break;
-            case FirebaseTranslateLanguage.FR:
-                language = "French";
-                break;
-            // Thêm các case cho các ngôn ngữ khác
-        }
-        return language;
     }
 
 

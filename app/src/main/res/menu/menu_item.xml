@@ -12,8 +12,8 @@
         />
     <item
         android:id="@+id/speak"
-        android:icon="@drawable/ic_speak"
-        android:title="@string/Speak"
+        android:icon="@drawable/ic_note"
+        android:title="@string/Note"
 
         />
     <item
