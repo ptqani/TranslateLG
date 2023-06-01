@@ -2,6 +2,7 @@ package com.example.translatelg;
 
 import android.database.Cursor;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +19,7 @@ public class HistoryFragment extends Fragment {
     DBHelper dbHelper;
     Button delete_data;
     ArrayList<String> historyid, text, textts;
-    CustomAdapter customAdapter;
+    CustomHistoryAdapter customAdapter;
     private RecyclerView rvHistory;
 
     @Override
@@ -27,13 +28,12 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         rvHistory = view.findViewById(R.id.rvHistory);
         delete_data = view.findViewById(R.id.deleteHis);
-        //Khởi tạo đối tượng dbHelper và danh sách lịch sử dịch
         dbHelper = new DBHelper(getContext());
         historyid = new ArrayList<>();
         text = new ArrayList<>();
         textts = new ArrayList<>();
-        // Tạo và thiết lập CustomAdapter cho RecyclerView
-        customAdapter = new CustomAdapter(getContext(), historyid, text, textts);
+
+        customAdapter = new CustomHistoryAdapter(getContext(), historyid, text, textts);
         rvHistory.setAdapter(customAdapter);
         rvHistory.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -55,21 +55,24 @@ public class HistoryFragment extends Fragment {
         updateTranslationHistory(); // Cập nhật lịch sử dịch khi fragment được hiển thị lại
     }
 
-     // tải dữ liệu lịch sử dịch từ cơ sở dữ liệu vào các danh sách
+    // tải dữ liệu lịch sử dịch từ cơ sở dữ liệu vào các danh sách
     private void loadData() {
         Cursor cursor = dbHelper.readAllData(); // Lấy dữ liệu từ cơ sở dữ liệu
-            // duyệt qua từng dòng dữ liệu
+        if (cursor.getCount() == 0) {
+            Toast.makeText(getContext(), "Không có dữ liệu", Toast.LENGTH_SHORT).show();
+        } else {
             while (cursor.moveToNext()) {
                 historyid.add(cursor.getString(0)); // Thêm ID vào danh sách lịch sử
                 text.add(cursor.getString(1)); // Thêm văn bản gốc vào danh sách lịch sử
                 textts.add(cursor.getString(2)); // Thêm văn bản dịch vào danh sách lịch sử
+            }
         }
     }
 
 
-     // xóa toàn bộ dữ liệu lịch sử dịch
+    // xóa toàn bộ dữ liệu lịch sử dịch
     private void deleteAllData() {
-        dbHelper.deleteAllData(); // Xóa toàn bộ dữ liệu trong cơ sở dữ liệu
+        dbHelper.deleteAllDataTable(); // Xóa toàn bộ dữ liệu trong cơ sở dữ liệu
         historyid.clear();
         text.clear();
         textts.clear();
@@ -78,7 +81,7 @@ public class HistoryFragment extends Fragment {
     }
 
 
-     //  cập nhật lịch sử dịch từ cơ sở dữ liệu và cập nhật dữ liệu trong adapter
+    //  cập nhật lịch sử dịch từ cơ sở dữ liệu và cập nhật dữ liệu trong adapter
     private void updateTranslationHistory() {
         historyid.clear();
         text.clear();
@@ -87,4 +90,3 @@ public class HistoryFragment extends Fragment {
         customAdapter.notifyDataSetChanged(); // Cập nhật adapter để hiển thị dữ liệu mới
     }
 }
-

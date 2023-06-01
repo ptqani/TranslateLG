@@ -2,11 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fmSetting"
+    style="@style/SCREEN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SettingFragment"
-    style="@style/SCREEN"
-    >
+    tools:context=".SettingFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,25 +20,25 @@
             android:src="@drawable/languages" />
 
         <TextView
+            style="@style/TEXT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="4dp"
-            android:text="TRANSLATE LG"
 
+            android:text="TRANSLATE LG"
             android:textSize="23sp"
-            android:textStyle="bold"
-            style="@style/TEXT"/>
+            android:textStyle="bold" />
 
         <Switch
             android:id="@+id/switch1"
+            style="@style/SWITCH"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Dark mode"
             android:layout_margin="20dp"
-            android:textSize="20sp"
+            android:text="Dark mode"
 
-            style="@style/SWITCH" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </FrameLayout>

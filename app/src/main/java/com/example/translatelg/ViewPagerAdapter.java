@@ -20,7 +20,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new HistoryFragment();
             case 2:
-                return new SpeakFragment();
+                return new NoteFragment();
             case 3:
                 return new SettingFragment();
             default:

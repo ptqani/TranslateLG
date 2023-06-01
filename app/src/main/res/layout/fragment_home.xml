@@ -2,14 +2,13 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/SCREEN"
-
-    android:orientation="vertical"
-    tools:context=".HomeFragment"
     android:id="@+id/container"
-    >
+    style="@style/SCREEN"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,14 +30,14 @@
                 android:src="@drawable/languages" />
 
             <TextView
+                style="@style/TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="4dp"
                 android:text="TRANSLATE LG"
                 android:textSize="23sp"
-                android:textStyle="bold"
-                style="@style/TEXT"/>
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -116,12 +115,11 @@
 
             <ImageView
                 android:id="@+id/idCopy"
+                style="@style/IMGVIEW"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_copy"
-                style="@style/IMGVIEW"
-              />
+                app:srcCompat="@drawable/ic_copy" />
 
             <ImageView
                 android:id="@+id/idCamera"
@@ -133,18 +131,17 @@
 
             <ImageView
                 android:id="@+id/idIVMic"
+                style="@style/IMGVIEW"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
-                app:srcCompat="@drawable/ic_mic"
-                style="@style/IMGVIEW"
-                />
+                app:srcCompat="@drawable/ic_mic" />
 
             <ImageView
                 android:id="@+id/idSound"
                 style="@style/IMGVIEW"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginEnd="10dp"
                 app:srcCompat="@drawable/ic_sound" />
         </LinearLayout>
@@ -157,11 +154,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="15dp"
+            android:background="@color/blue"
             android:text="Dịch"
             android:textAllCaps="false"
-            android:background="@color/blue"
-            android:textColor="#FFFFFF"
-            />
+            android:textColor="#FFFFFF" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -172,29 +168,30 @@
 
             <ImageView
                 android:id="@+id/idCopyRS"
+                style="@style/IMGVIEW"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="5dp"
                 android:visibility="gone"
-                app:srcCompat="@drawable/ic_copy"
-                style="@style/IMGVIEW"/>
+                app:srcCompat="@drawable/ic_copy" />
 
             <ImageView
                 android:id="@+id/idSoundRS"
+                style="@style/IMGVIEW"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="5dp"
                 android:visibility="gone"
-                app:srcCompat="@drawable/ic_sound"
-                style="@style/IMGVIEW"/>
+                app:srcCompat="@drawable/ic_sound" />
+
             <ImageView
                 android:id="@+id/share"
+                style="@style/IMGVIEW"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginEnd="5dp"
                 android:visibility="gone"
-                app:srcCompat="@drawable/ic_share"
-                style="@style/IMGVIEW"/>
+                app:srcCompat="@drawable/ic_share" />
         </LinearLayout>
 
         <ScrollView

@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.nav);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPager.setAdapter(viewPagerAdapter);
-        FirebaseApp.initializeApp(this);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);//fragemnt hiện tại .
+        viewPager.setAdapter(viewPagerAdapter); //lướt qua
+        FirebaseApp.initializeApp(this); // Firebase SDK . sử dụng các dịch vụ của firebase
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
