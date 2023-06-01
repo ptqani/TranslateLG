@@ -26,14 +26,18 @@ public class CustomNoteAdapter extends RecyclerView.Adapter<CustomNoteAdapter.My
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
+
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { // tạo ra một view để hiển thịmột mục trong ds
+        LayoutInflater inflater = LayoutInflater.from(context); // chuyển các tệp nguồn => View
+
         View view = inflater.inflate(R.layout.note_row, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CustomNoteAdapter.MyViewHolder holder, final int position) {
+
+    public void onBindViewHolder(@NonNull CustomNoteAdapter.MyViewHolder holder, final int position) { //liên kết dữ liệu với viewHolder
+
         int reversePosition = getItemCount() - position - 1;
         holder.noteid.setText(noteid.get(reversePosition));
         holder.titleNote.setText(titleNote.get(reversePosition));

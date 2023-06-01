@@ -2,6 +2,7 @@ package com.example.translatelg;
 
 import android.database.Cursor;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +19,7 @@ public class HistoryFragment extends Fragment {
     DBHelper dbHelper;
     Button delete_data;
     ArrayList<String> historyid, text, textts;
-    CustomAdapter customAdapter;
+    CustomHistoryAdapter customAdapter;
     private RecyclerView rvHistory;
 
     @Override
@@ -32,7 +33,7 @@ public class HistoryFragment extends Fragment {
         text = new ArrayList<>();
         textts = new ArrayList<>();
 
-        customAdapter = new CustomAdapter(getContext(), historyid, text, textts);
+        customAdapter = new CustomHistoryAdapter(getContext(), historyid, text, textts);
         rvHistory.setAdapter(customAdapter);
         rvHistory.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -54,7 +55,7 @@ public class HistoryFragment extends Fragment {
         updateTranslationHistory(); // Cập nhật lịch sử dịch khi fragment được hiển thị lại
     }
 
-     // tải dữ liệu lịch sử dịch từ cơ sở dữ liệu vào các danh sách
+    // tải dữ liệu lịch sử dịch từ cơ sở dữ liệu vào các danh sách
     private void loadData() {
         Cursor cursor = dbHelper.readAllData(); // Lấy dữ liệu từ cơ sở dữ liệu
         if (cursor.getCount() == 0) {
@@ -69,9 +70,9 @@ public class HistoryFragment extends Fragment {
     }
 
 
-     // xóa toàn bộ dữ liệu lịch sử dịch
+    // xóa toàn bộ dữ liệu lịch sử dịch
     private void deleteAllData() {
-        dbHelper.deleteAllData(); // Xóa toàn bộ dữ liệu trong cơ sở dữ liệu
+        dbHelper.deleteAllDataTable(); // Xóa toàn bộ dữ liệu trong cơ sở dữ liệu
         historyid.clear();
         text.clear();
         textts.clear();
@@ -80,7 +81,7 @@ public class HistoryFragment extends Fragment {
     }
 
 
-     //  cập nhật lịch sử dịch từ cơ sở dữ liệu và cập nhật dữ liệu trong adapter
+    //  cập nhật lịch sử dịch từ cơ sở dữ liệu và cập nhật dữ liệu trong adapter
     private void updateTranslationHistory() {
         historyid.clear();
         text.clear();
@@ -89,4 +90,3 @@ public class HistoryFragment extends Fragment {
         customAdapter.notifyDataSetChanged(); // Cập nhật adapter để hiển thị dữ liệu mới
     }
 }
-

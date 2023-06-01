@@ -18,6 +18,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 public class NoteFragment extends Fragment {
+
     // nút thêm ghi chú mới
     FloatingActionButton addNote;
     // dc sử dung thao tác với csdl
@@ -27,6 +28,7 @@ public class NoteFragment extends Fragment {
     // hiển  thị danh sách ghi chú trong recy
     CustomNoteAdapter adapter;
     // hiển thị danh sách gchu dưới dạng cuộn
+
     private RecyclerView rvNote;
 
     @Override
@@ -36,6 +38,7 @@ public class NoteFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_note, container, false);
         rvNote = view.findViewById(R.id.rvNote);
         addNote = view.findViewById(R.id.addNote);
+
         // đối tượng làm việc với csdl
         dbHelper = new DBHelper(getContext());
         // lưu dữ liệu gh chú

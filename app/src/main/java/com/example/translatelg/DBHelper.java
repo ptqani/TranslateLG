@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }
-
+// Tạo bảng
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TRANSLATION_HISTORY_TABLE = "CREATE TABLE " + TABLE_TRANSLATION_HISTORY + "("
@@ -92,12 +92,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    //xóa bảng
+
+    //xóa tất cả dữ liệu trong bảng
+
     public void deleteAllDataTable() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_TRANSLATION_HISTORY);
         db.close();
     }
+
+// cập nhật ghi chú
 
     public void UpdateDataNote(String rowid, String source_title, String context_text) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -107,6 +111,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.update(TABLE_TRANSLATION_NOTE, values, "id=?", new String[]{rowid});
         db.close();
     }
+
+// xóa ghi chú
 
     public void DeleteDataNote(String rowid) {
         SQLiteDatabase db = this.getWritableDatabase();

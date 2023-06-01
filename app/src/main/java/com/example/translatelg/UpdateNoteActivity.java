@@ -22,7 +22,10 @@ public class UpdateNoteActivity extends AppCompatActivity {
         contentNoteUp = findViewById(R.id.contentNoteUp);
         buttonAddNoteUp = findViewById(R.id.buttonAddNoteUp);
         buttonDeleteNote = findViewById(R.id.buttonDeleteNote);
-        getIntenData();
+
+        getIntenData(); //nhận dữ liệu từ
+        //Cập nhật ghi chú
+
         buttonAddNoteUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -34,6 +37,9 @@ public class UpdateNoteActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        // Xóa ghi chú
+
         buttonDeleteNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +52,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
 
     }
 
+//lấy dữ liệu
     void getIntenData() {
         if (getIntent().hasExtra("id") && getIntent().hasExtra("title") && getIntent().hasExtra("content")) {
             // lấy dữ liệu từ intent
@@ -56,7 +63,7 @@ public class UpdateNoteActivity extends AppCompatActivity {
             titleNoteUp.setText(title);
             contentNoteUp.setText(content);
         } else {
-
+            Toast.makeText(UpdateNoteActivity.this, "Không nhận được dữ liệu", Toast.LENGTH_SHORT).show();
         }
     }
 }
